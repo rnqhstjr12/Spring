@@ -161,8 +161,9 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       
-      <Context docBase="ex01" path="/" reloadable="true" source="org.eclipse.jst.jee.server:ex01">
-					<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxIdle="30" maxTotal="100" maxWaitMillis="10000" name="jdbc/TestDB" password="ezen1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/nscott" username="root"/>
+      
+	  <Context docBase="ex02" path="/controller" reloadable="true" source="org.eclipse.jst.jee.server:ex02">
+	  		<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxIdle="30" maxTotal="100" maxWaitMillis="10000" name="jdbc/TestDB" password="ezen1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/spring" username="root"/>
 	  </Context>
 	  </Host>
     </Engine>
