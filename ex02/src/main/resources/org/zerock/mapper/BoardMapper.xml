@@ -9,4 +9,37 @@
 		WHERE bno > 0 
 		]]>
 	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbl_board (bno, title, content, writer)
+		VALUES (NULL, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+			SELECT NULL from dual
+		</selectKey>
+		
+		INSERT INTO tbl_board (bno, title, content, writer)
+		VALUES (NULL, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<select id="read" resultType="org.zerock.domain.BoardVO">
+		SELECT * FROM tbl_board
+		WHERE bno = #{bno}
+	</select>
+	
+	<select id="delete">
+		DELETE FROM tbl_board
+		WHERE bno = #{bno}
+	</select>
+	
+	<update id="update">
+		UPDATE tbl_board
+		SET title = #{title},
+			content = #{content},
+			writer = #{writer},
+			updateDate = NOW()
+		WHERE bno = #{bno}
+	</update>
 </mapper>
