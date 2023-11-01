@@ -17,7 +17,7 @@
 	
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
-			SELECT NULL from dual
+			SELECT NULL FROM dual
 		</selectKey>
 		
 		INSERT INTO tbl_board (bno, title, content, writer)
