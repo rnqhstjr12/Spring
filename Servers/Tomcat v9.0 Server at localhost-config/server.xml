@@ -162,10 +162,8 @@
 
       
       
-	  <Context docBase="ex02" path="/" reloadable="true" source="org.eclipse.jst.jee.server:ex02">
-	  		<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxIdle="30" maxTotal="100" maxWaitMillis="10000" name="jdbc/TestDB" password="ezen1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/spring" username="root"/>
-	  </Context>
-	  </Host>
+	  
+	  <Context docBase="ex03" path="/" reloadable="false" source="org.eclipse.jst.jee.server:ex03"/></Host>
     </Engine>
   </Service>
 </Server>

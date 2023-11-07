@@ -29,17 +29,28 @@
 		WHERE bno = #{bno}
 	</select>
 	
-	<select id="delete">
+	<delete id="delete">
 		DELETE FROM tbl_board
 		WHERE bno = #{bno}
-	</select>
+	</delete>
 	
 	<update id="update">
 		UPDATE tbl_board
 		SET title = #{title},
 			content = #{content},
 			writer = #{writer},
-			updateDate = NOW()
+			updatedate = now()
 		WHERE bno = #{bno}
 	</update>
+	
+	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+		<![CDATA[
+			SELECT bno, title, content, writer, regdate, updatedate
+			FROM(SELECT /* +INDEXT_DESC(tbl_board pk_board) */
+						rownum rn, bno, title, content, writer, regdate, updatedate
+				 FROM tbl_board
+				 WHERE rownum <= 20)
+			WHERE rn > 10
+		]]>
+	</select>
 </mapper>
