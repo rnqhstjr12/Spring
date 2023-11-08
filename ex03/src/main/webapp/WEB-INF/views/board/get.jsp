@@ -42,6 +42,40 @@
 					</form>
 			</div>
 			<!-- end panel-body -->
+			<div class= 'row'>
+            
+	            <div class="col-lg-12">
+	            
+		            <!--  /.panel -->
+		            <div class="panel panel-default">
+			            <div class="panel-heading">
+				            <i class="fa fa-comments fa-fw"></i>Reply
+				            </div>
+				            
+					            <!--  /.panel-heading -->
+					            <div class="panel-body">
+					            
+						            <ul class="chat">
+						            <!--  start reply -->
+						            <li class="left clearfix" data-rno='12'>
+							            <div>
+							            	<div class="header">
+							            		<strong class="primary-font">user00</strong>
+							            	<small class="pull-right text-muted">2018-01-01 13:13</small>
+							            </div>
+						            <p>Good job!</p>
+					            </div>
+				            </li>
+				            <!-- end reply -->
+			            </ul>
+			            <!--  ./end ul -->
+		            </div>
+		            <!--  /.panel .chat-panel -->
+	            </div>
+            </div>
+            <!--  ./ end row -->
+
+         </div>
 		</div>
 		<!-- end panel-body -->
 	</div>
@@ -49,6 +83,78 @@
 </div>
 <!-- /.row -->
 <%@ include file="../includes/footer.jsp" %>
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+<script type="text/javascript"	>
+$(document).ready(function() {
+	var bnoValue = '<c:out value="${board.bno}"/'>;
+	var replyUL = $(".chat");
+	
+	showList(1);
+	
+	function showList(page) {
+		replyService.getList({bno:bnoValue, page: page || 1},
+			function(list) {
+			var str = "";
+			if (list == null || list.length == 0) {
+				replyUL.html("");
+				
+				return;
+			}
+			for (var i = 0, len = list.length || 0; i < len; i++) {
+				str += "<li class='left clearfix' data-rno='"+list[i].rno + "'>";
+				str += "<div><div class='header'><strong class='primary-font'>" + list[i].replyer + "</strong>";
+				str += "<small class='pull-right text-muted'>" + list[i].replyDate + "</small></div>";
+				str += "<p>" + list[i].reply + "</p></div></li>";
+			}
+			replyUL.html(str);
+		}); // end function
+		
+	} // end showList
+})
+</script>
+<script type="text/javascript">
+console.log("==========================");
+console.log("제이에스 테스트");
+
+var bnoValue = '<c:out value="${board.bno}"/>';
+/* 
+replyService.add({reply:"제이에스 테스트", replyer:"테스터", bno:bnoValue},
+		function(result) {
+			alert("리설트: " + result);
+		}
+);
+
+replyService.getList({ bno:bnoValue, page:1 }, function(list) {
+	for (var i = 0, len = list.length || 0; i < len; i++) {
+		console.log(list[i]);
+		console.log(len);
+	}
+});
+
+replyService.remove(10, function(cnt) {
+	
+	console.log(cnt);
+	
+	if (cnt === "success") {
+		alert("REMOVED");
+	}
+},function(err) {
+	alert('ERROR...');	
+});
+
+replyService.update({
+	rno : 22,
+	bno : bnoValue,
+	reply : "모디피이드 리플리이이....."
+}, function(result) {
+	alert("수정 완료...");
+});
+
+replyService.get(10, function(data) {
+	console.log(data);
+});
+*/
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var operForm = $("#operForm");
@@ -63,6 +169,11 @@ $(document).ready(function() {
 		operForm.submit();
 	});
 });
+
+$(document).ready(function() {
+	console.log(replyService);
+});
+
 </script>
 </body>
 </html>
